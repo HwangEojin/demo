@@ -4,17 +4,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>메인 페이지</title>
+    <title>Baseline</title>
 </head>
 <body>
-    <h2>Baseline 프로젝트 메인 페이지</h2>
+    <h2>Baseline</h2>
     <hr>
 
     <%-- 세션에 loginId가 없으면 로그인 버튼 보이기 --%>
     <c:choose>
         <c:when test="${empty sessionScope.loginId}">
             <p>로그인이 필요합니다.</p>
-            <button onclick="location.href='login.jsp'">로그인 하러가기</button>
+            <button onclick="location.href='login.jsp'">로그인</button>
         </c:when>
         
         <%-- 세션에 loginId가 있으면 환영 메시지와 로그아웃 버튼 보이기 --%>
