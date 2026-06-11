@@ -12,18 +12,18 @@
 
     <%-- 세션에 loginId가 없으면 로그인 버튼 보이기 --%>
     <c:choose>
-        <c:when test="${empty sessionScope.loginId}">
+        <c:when test="${empty sessionScope.loginUser}">
             <p>로그인이 필요합니다.</p>
-            <button onclick="location.href='login.jsp'">로그인</button>
+            <button onclick="location.href='login_form.do'">로그인</button>
         </c:when>
         
         <%-- 세션에 loginId가 있으면 환영 메시지와 로그아웃 버튼 보이기 --%>
         <c:otherwise>
             <p style="color: blue; font-weight: bold;">
-                ${sessionScope.loginName}(${sessionScope.loginId})님, 환영합니다! 
-                (권한: ${sessionScope.loginType == 'A' ? '관리자' : '일반유저'})
+                ${sessionScope.loginUser.userNm}(${sessionScope.loginUser.userId})님, 환영합니다! 
+                (권한: ${sessionScope.loginUser.userTp == 'A' ? '관리자' : '일반유저'})
             </p>
-            <button onclick="location.href='login?action=logout'">로그아웃</button>
+            <button onclick="location.href='logout.do'">로그아웃</button>
         </c:otherwise>
     </c:choose>
 </body>
