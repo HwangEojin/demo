@@ -1,0 +1,144 @@
+/* Admin Styles - css/admin.css */
+
+.admin-container {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 8px;
+}
+
+.admin-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+.admin-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--main-text-color, #121212);
+    text-align: left;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.admin-table th, .admin-table td {
+    padding: 15px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.admin-table thead th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: var(--main-text-color, #121212);
+    border-bottom: 1px solid var(--accent-color, #333);
+}
+
+.admin-table .col-seq { width: 8%; }
+.admin-table .col-id { width: 12%; }
+.admin-table .col-name { width: 15%; }
+.admin-table .col-email { width: 26%; }
+.admin-table .col-num { width: 12%; }
+.admin-table .col-auth { width: 10%; }
+.admin-table .col-manage { width: 17%; }
+
+/* 페이징 (Pagination) */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination a, .pagination strong {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 2px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    text-decoration: none;
+    color: var(--main-text-color, #121212);
+    background-color: #ffffff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.pagination a:hover {
+    background-color: #f8f8f8;
+}
+
+.pagination strong.current {
+    background-color: var(--accent-color, #333);
+    color: var(--accent-text-color, #ffffff);
+    border-color: var(--accent-color, #333);
+    font-weight: 600;
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.search-form {
+    display: flex;
+    gap: 8px;
+}
+
+.search-form select,
+.search-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.search-form input[type="text"] {
+    width: 250px;
+}
+
+.search-form .btn-search {
+    padding: 8px 20px;
+    min-width: auto;
+    background-color: var(--accent-color, #333);
+    color: var(--accent-text-color, #ffffff);
+    border: 1px solid var(--accent-color, #333);
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.admin-btn-form {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.admin-table .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    min-width: 80px;
+    border: 1px solid var(--accent-color, #333);
+    background-color: var(--accent-color, #333);
+    color: var(--accent-text-color, #ffffff);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-table .btn-sm:hover {
+    background-color: #555;
+    border-color: #555;
+}
+
+.admin-table .btn-sm.btn-danger {
+    background-color: #ffffff;
+    color: #d93025;
+    border: 1px solid #d93025;
+}
+
+.admin-table .btn-sm.btn-danger:hover {
+    background-color: #d93025;
+    color: #ffffff;
+}

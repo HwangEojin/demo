@@ -1,0 +1,18 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.jvmargs": "-Dfile.encoding=UTF-8",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": ["-NoExit", "-Command", "chcp 65001"]
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": ["/K", "chcp 65001"],
+      "icon": "terminal-cmd"
+    }
+  }
+}

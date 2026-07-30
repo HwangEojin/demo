@@ -1,0 +1,100 @@
+/* css/mypage.css */
+
+.form-container.mypage-form {
+    max-width: 500px;
+}
+
+.mypage-form h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.mypage-form .sub-heading {
+    color: var(--secondary-text-color);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.mypage-form .form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.mypage-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--main-text-color);
+}
+
+.mypage-form input[type="text"],
+.mypage-form input[type="password"],
+.mypage-form input[type="email"],
+.mypage-form input[type="tel"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.mypage-form input[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.mypage-form .form-group small {
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+    margin-top: 5px;
+    display: block;
+}
+
+.mypage-form .form-actions {
+    margin-top: 30px;
+}
+
+.mypage-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    cursor: pointer;
+}
+
+.success-message {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    color: #0050b3;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.withdrawal-section {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.withdrawal-link {
+    background: none;
+    border: none;
+    color: #6c757d;
+    /* 회색 글자 */
+    font-size: 0.9em;
+    /* 작은 글자 크기 */
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+}
+
+.withdrawal-link:hover {
+    color: #343a40;
+}
