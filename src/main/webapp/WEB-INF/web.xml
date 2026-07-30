@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Baseline Playground</display-name>
+
+    <!-- 
+      필터 정의 (Filter Definitions)
+      - 애플리케이션에서 사용할 필터들을 선언합니다.
+    -->
+    <filter>
+        <filter-name>CookieSecurityFilter</filter-name>
+        <filter-class>com.baseline.filter.CookieSecurityFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.baseline.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>DecryptionFilter</filter-name>
+        <filter-class>com.baseline.filter.DecryptionFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>NonceHandlerFilter</filter-name>
+        <filter-class>com.baseline.filter.NonceHandlerFilter</filter-class>
+    </filter>
+
+    <!-- 
+      필터 매핑 (Filter Mappings)
+      - 필터가 어떤 URL 패턴에 대해 실행될지 지정합니다.
+      - 여기에 등록된 순서대로 필터 체인이 구성됩니다.
+    -->
+    <filter-mapping>
+        <filter-name>CookieSecurityFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DecryptionFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>NonceHandlerFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+</web-app>
