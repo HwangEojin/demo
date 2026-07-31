@@ -4,8 +4,12 @@ services:
   db:
     image: mysql:8.0
     container_name: baselinedb
+    command: 
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-server-handshake
     environment:
-      MYSQL_ROOT_PASSWORD: root_password_secure # 실제 환경에서는 더 강력한 비밀번호를 사용하세요.
+      MYSQL_ROOT_PASSWORD: root_password_secure
       MYSQL_DATABASE: baselinedb
       MYSQL_USER: baseline
       MYSQL_PASSWORD: base1234
