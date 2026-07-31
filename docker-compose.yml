@@ -9,6 +9,10 @@ services:
       MYSQL_DATABASE: baselinedb
       MYSQL_USER: baseline
       MYSQL_PASSWORD: base1234
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
     volumes:
       - db_data:/var/lib/mysql
       - ./db_init:/docker-entrypoint-initdb.d
