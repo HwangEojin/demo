@@ -27,8 +27,6 @@ public class FrontController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
         String commandPath = requestURI.substring(contextPath.length());

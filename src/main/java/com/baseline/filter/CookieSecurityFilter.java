@@ -26,7 +26,7 @@ public class CookieSecurityFilter implements Filter {
         String requestURI = req.getRequestURI();
         String contextPath = req.getContextPath().isEmpty() ? "/" : req.getContextPath();
 
-        // 1. [핵심 수정] 응답이 커밋되기 전(chain.doFilter 호출 전)에 강제로 쿠키 헤더를 재전송하여 브라우저 속성 덮어쓰기
+        // 1. 응답이 커밋되기 전(chain.doFilter 호출 전)에 강제로 쿠키 헤더를 재전송하여 브라우저 속성 덮어쓰기
         HttpSession session = req.getSession(false);
         if (session != null) {
             String existingSessionId = session.getId();

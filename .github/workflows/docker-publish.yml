@@ -1,0 +1,43 @@
+name: Build and Publish Docker Image
+
+# 이 워크플로우가 언제 실행될지 트리거(Trigger)를 정의합니다.
+on:
+  push:
+    branches: [ "main" ] # main 브랜치에 코드가 푸시될 때만 실행됩니다.
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest # GitHub가 제공하는 최신 우분투 가상 환경에서 실행됩니다.
+
+    steps:
+      # 1. 저장소의 코드를 가상 환경으로 체크아웃(다운로드) 합니다.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Docker 빌드를 위해 QEMU (멀티 플랫폼 빌드 지원) 설정
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # 3. Docker Buildx (고급 빌드 도구) 설정
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 4. GitHub Secrets에 저장된 자격 증명으로 Docker Hub에 로그인합니다.
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 5. 제공된 Dockerfile을 바탕으로 이미지를 빌드하고 Docker Hub로 푸시합니다.
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: . # 현재 디렉토리의 Dockerfile을 사용
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/baseline-web:latest
+          # 보안 권장 사항: 레이어 캐싱을 통해 빌드 속도 향상
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/baseline-web:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/baseline-web:buildcache,mode=max
