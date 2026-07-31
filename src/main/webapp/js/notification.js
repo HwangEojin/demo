@@ -16,13 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Automatically remove notifications after a delay
         const notifications = container.querySelectorAll('.notification');
         notifications.forEach(notification => {
             setTimeout(() => {
                 const closeBtn = notification.querySelector('.close-btn');
                 if (closeBtn) closeBtn.click();
-            }, 5000); // 5초 후 자동 닫힘
+            }, 5000);
         });
     }
 });

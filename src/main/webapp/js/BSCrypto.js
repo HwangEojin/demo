@@ -69,7 +69,7 @@ const BSCrypto = (() => {
     const WriteLogic = {
         deriveKeys: async () => {
             const scriptTag = document.getElementById('bs-crypto-script');
-            if (!scriptTag) throw new Error("Script tag with id 'bs-crypto-script' not found.");
+            if (!scriptTag) throw new Error("Script 태그 id 'bs-crypto-script' 를 찾을 수 없습니다.");
             const nonce = Utils.getNonce();
             const response = await fetch(scriptTag.src + '?t=' + new Date().getTime());
             let sourceCode = await response.text();
@@ -153,7 +153,7 @@ const BSCrypto = (() => {
                     bInput.value = Utils.bytesToBase64(keys.sid.slice(0, 32));
                     tempForm.appendChild(bInput);
     
-                } else { // 'write'
+                } else {
                     const keys = await WriteLogic.deriveKeys();
                     const encryptedBytes = Utils.encrypt(serializedData, keys);
     

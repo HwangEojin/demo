@@ -8,7 +8,6 @@ function showFeedback({
   icon = null,
   triggerApi = null,
   executedData = null,
-  resultData = null, // 이 줄은 이전 상태로 되돌릴 때 제거되어야 합니다.
   onClose = null,
 }) {
   if (document.querySelector(".feedback-overlay")) {
@@ -87,7 +86,7 @@ function showFeedback({
   content.appendChild(titleElem);
   content.appendChild(textElem);
 
-  if (triggerApi || executedData) { // resultData 조건 제거
+  if (triggerApi || executedData) {
     const dataContainer = document.createElement("div");
     dataContainer.className = "feedback-data-container";
 
@@ -206,7 +205,6 @@ function showFeedback({
 function pollFeedbackStatus() {
 
   const contextPath = window.contextPath || "";
-  //credentials 옵션 및 cache 옵션 추가
   fetch(`${contextPath}/api/feedback/status.do`, {
     method: "GET",
     credentials: "same-origin",
@@ -232,11 +230,10 @@ function pollFeedbackStatus() {
       console.debug("Feedback polling failed:", error);
     })
     .finally(() => {
-      setTimeout(pollFeedbackStatus, 3000); // 3초 주기 폴링
+      setTimeout(pollFeedbackStatus, 3000);
     });
 }
 
-// DOM 로드 즉시 최초 1회 즉시 실행
 document.addEventListener("DOMContentLoaded", () => {
   pollFeedbackStatus();
 });
