@@ -31,7 +31,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DB_URL: jdbc:mysql://db:3306/baselinedb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+      DB_URL: jdbc:mysql://db:3306/baselinedb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8
       DB_USER: baseline
       DB_PASSWORD: base1234
 

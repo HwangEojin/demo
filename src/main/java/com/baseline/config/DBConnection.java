@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBConnection {
   private static DBConnection instance;
   
-  private final String URL = System.getenv("DB_URL") != null ? System.getenv("DB_URL") : "jdbc:mysql://localhost:3306/baselinedb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true";
+  private final String URL = System.getenv("DB_URL") != null ? System.getenv("DB_URL") : "jdbc:mysql://localhost:3306/baselinedb?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8";
   private final String USER = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "baseline";
   private final String PASSWORD = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "base1234";
 
