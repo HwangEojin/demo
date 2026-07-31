@@ -7,7 +7,6 @@ services:
     command: 
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
-      - --skip-character-set-server-handshake
     environment:
       MYSQL_ROOT_PASSWORD: root_password_secure
       MYSQL_DATABASE: baselinedb
