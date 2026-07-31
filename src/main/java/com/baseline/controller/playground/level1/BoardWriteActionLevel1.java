@@ -50,6 +50,16 @@ public class BoardWriteActionLevel1 implements Action {
             String title = request.getParameter("title");
             String content = request.getParameter("content");
 
+            Part filePart = request.getPart("file");
+
+            // 0바이트 파일 업로드 체크
+            if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().trim().isEmpty() && filePart.getSize() == 0) {
+                NotificationUtil.addNotification(request, "용량이 0인 파일은 업로드할 수 없습니다.", "error");
+                response.sendRedirect(request.getContextPath() + "/playground/level1/write.do");
+                return;
+            }
+
+
             BoardVO boardVO = new BoardVO();
             boardVO.setBoardTitle(title);
             boardVO.setBoardContents(content);
@@ -61,7 +71,6 @@ public class BoardWriteActionLevel1 implements Action {
 
             // 파일 업로드 처리
             if (boardSeq > 0) {
-                Part filePart = request.getPart("file");
                 if (filePart != null && filePart.getSize() > 0) {
                     // 사용자가 제출한 파일명을 그대로 사용 (Path Traversal 취약점 포인트)
                     originalFileName = filePart.getSubmittedFileName();

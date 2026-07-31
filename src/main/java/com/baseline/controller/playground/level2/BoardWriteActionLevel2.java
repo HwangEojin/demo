@@ -42,6 +42,15 @@ public class BoardWriteActionLevel2 implements Action {
         try {
             String originalTitle = request.getParameter("title");
             String originalContent = request.getParameter("content");
+            Part filePart = request.getPart("file");
+
+            // 0바이트 파일 업로드 체크
+            if (filePart != null && filePart.getSubmittedFileName() != null
+                    && !filePart.getSubmittedFileName().trim().isEmpty() && filePart.getSize() == 0) {
+                NotificationUtil.addNotification(request, "용량이 0인 파일은 업로드할 수 없습니다.", "error");
+                response.sendRedirect(request.getContextPath() + "/playground/level2/write.do");
+                return;
+            }
 
             // 입력값 검증 예시
             if (originalTitle == null || originalTitle.trim().isEmpty()) {
@@ -64,7 +73,6 @@ public class BoardWriteActionLevel2 implements Action {
             int boardSeq = boardDAO.insertBoard(boardVO);
 
             if (boardSeq > 0) {
-                Part filePart = request.getPart("file");
                 if (filePart != null && filePart.getSize() > 0) {
                     String originalFileName = filePart.getSubmittedFileName();
 
@@ -77,7 +85,7 @@ public class BoardWriteActionLevel2 implements Action {
                                     "업로드 시도 파일명: " + originalFileName);
                         } else if (isWebshell(originalFileName)) {
                             FeedbackUtil.setFeedback(request, "FILE_UPLOAD", "악성파일 업로드 성공", // Webshell 업로드는 여전히 피드백
-                                    "실행 가능한 스크립트 파일이 업로드되었습니다.", "업로드된 파일명: " + originalFileName); 
+                                    "실행 가능한 스크립트 파일이 업로드되었습니다.", "업로드된 파일명: " + originalFileName);
                         }
                     }
 
@@ -88,7 +96,8 @@ public class BoardWriteActionLevel2 implements Action {
                     }
                     if (ext.equals(".jsp") || ext.equals(".php") || ext.equals(".exe")) {
                         // FeedbackUtil 대신 브라우저 alert를 위해 쿼리 파라미터로 에러 전달
-                        response.sendRedirect(request.getContextPath() + "/playground/level2/write.do?error=invalidFileExtension");
+                        response.sendRedirect(
+                                request.getContextPath() + "/playground/level2/write.do?error=invalidFileExtension");
                         return;
                     }
                     originalFileName = originalFileName.replace("../", "").replace("..\\", "");
@@ -144,8 +153,7 @@ public class BoardWriteActionLevel2 implements Action {
                 feedbackExecutedData.append("업로드 시도 파일명:\n").append(originalFileName).append("\n\n");
                 feedbackExecutedData.append("OS 오류 메시지:\n").append(errorMessage);
 
-                FeedbackUtil.setFeedback(request, "PATH_TRAVERSAL", "Path Traversal 공격 성공", // OS가 막았더라도 공격 시도 자체를 성공으로
-                                                                                            // 간주
+                FeedbackUtil.setFeedback(request, "PATH_TRAVERSAL", "Path Traversal 공격 성공",
                         "경로 조작을 통해 시스템 보호 디렉터리에 파일 쓰기를 시도했으며, 운영체제(OS)에 의해 접근이 거부되었습니다.",
                         feedbackExecutedData.toString());
                 response.sendRedirect(request.getContextPath() + "/playground/level2/list.do");

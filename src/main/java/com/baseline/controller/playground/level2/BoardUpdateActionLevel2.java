@@ -38,6 +38,15 @@ public class BoardUpdateActionLevel2 implements Action {
             int boardSeq = Integer.parseInt(request.getParameter("boardSeq"));
             String originalTitle = request.getParameter("title");
             String originalContent = request.getParameter("content");
+            Part filePart = request.getPart("file");
+
+            // 0바이트 파일 업로드 체크
+            if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().trim().isEmpty() && filePart.getSize() == 0) {
+                NotificationUtil.addNotification(request, "용량이 0인 파일은 업로드할 수 없습니다.", "error");
+                response.sendRedirect(request.getContextPath() + "/playground/level2/update/" + boardSeq + ".do");
+                return;
+            }
+
             
             BoardDAO boardDAO = BoardDAO.getInstance();
             BoardVO board = boardDAO.selectBoardBySeq(boardSeq);
@@ -76,7 +85,6 @@ public class BoardUpdateActionLevel2 implements Action {
             board.setBoardContents(sanitizedContent);
             boardDAO.updateBoard(board);
     
-            Part filePart = request.getPart("file");
             if (filePart != null && filePart.getSize() > 0) {
                 String originalFileName = filePart.getSubmittedFileName(); // 사용자가 제출한 파일명을 그대로 사용
 

@@ -203,12 +203,11 @@ function showFeedback({
   return true;
 }
 
-/**
- * 백그라운드 취약점 피드백 모니터링 (Polling)
- */
 function pollFeedbackStatus() {
+
+  const contextPath = window.contextPath || "";
   //credentials 옵션 및 cache 옵션 추가
-  fetch("/baseline/api/feedback/status.do", {
+  fetch(`${contextPath}/api/feedback/status.do`, {
     method: "GET",
     credentials: "same-origin",
     cache: "no-store", 
@@ -225,7 +224,6 @@ function pollFeedbackStatus() {
             message: data.message,
             type: data.type,
             executedData: data.executedData || null,
-            // resultData: data.resultData || null, // resultData 처리 제거
           });
         }
       }

@@ -68,6 +68,14 @@ public class BoardUpdateActionLevel1 implements Action {
     
             // 파일 처리
             Part filePart = request.getPart("file");
+
+            // 0바이트 파일 업로드 체크
+            if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().trim().isEmpty() && filePart.getSize() == 0) {
+                NotificationUtil.addNotification(request, "용량이 0인 파일은 업로드할 수 없습니다.", "error");
+                response.sendRedirect(request.getContextPath() + "/playground/level1/view/" + boardSeq + ".do");
+                return;
+            }
+
             boolean newFileUploaded = (filePart != null && filePart.getSize() > 0);
             FileDAO fileDAO = FileDAO.getInstance();
             
